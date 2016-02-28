@@ -6,13 +6,15 @@ module Network.Gazelle.Types.Search (
 ) where
 
 import Data.Aeson
+import Data.Text (Text)
 
+import Network.API.Builder
 import Network.Gazelle.Types.Gazelle
 
 data Page = Page {
     pCurrentPage :: Integer,
     pPages :: Integer,
-    pResults :: SearchResult
+    pResults :: [SearchResult]
 } deriving Show
 
 instance FromJSON Page where
@@ -33,7 +35,7 @@ data SearchResult = SearchResult {
     srVanityHouse :: Bool,
     srGroupYear :: Integer,
     srReleaseType :: Text,
-    srGroupTime :: Integer,
+    srGroupTime :: Text,
     srMaxSize :: Integer,
     srTotalSnatched :: Integer,
     srTotalSeeders :: Integer,
@@ -96,8 +98,8 @@ data TorrentResult = TorrentResult {
     trCanUseToken :: Bool
 } deriving Show
 
-instance FromJSON TRArtist where
-    parseJSON = withObject "TRArtist" $ \o -> TRArtist <$>
+instance FromJSON TorrentResult where
+    parseJSON = withObject "TorrentResult" $ \o -> TorrentResult <$>
         o .: "id" <*>
         o .: "editionId" <*>
         o .: "artists" <*>

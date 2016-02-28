@@ -17,7 +17,8 @@ module Network.Gazelle (
     getTorrentAndGroup,
     getTorrentGroup,
     getTorrentGroupAndChildren,
-    getIndex
+    getIndex,
+    defaultSearch
 ) where
 
 import Network.Gazelle.Actions

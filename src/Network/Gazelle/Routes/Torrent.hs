@@ -5,10 +5,10 @@ module Network.Gazelle.Routes.Torrent (
 
 import Network.Gazelle.Types
 
+import Data.Text (Text)
+
 import Network.API.Builder
 import Network.HTTP.Types.Method
-
-import Data.Text (Text)
 
 torrentRoute :: TorrentID -> Route
 torrentRoute (TorrentID t) = Route {

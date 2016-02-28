@@ -4,6 +4,9 @@ module Network.Gazelle.Routes.Search (
 
 import Data.Text (Text)
 
+import Network.API.Builder
+import Network.HTTP.Types.Method
+
 searchRoute :: Text -> Route
 searchRoute t = Route {
     urlPieces = [],
