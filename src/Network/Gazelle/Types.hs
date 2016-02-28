@@ -1,24 +1,4 @@
-module Network.Gazelle.Types (
-    Artist(..),
-    ArtistID(..),
-    Entry(..),
-    MusicInfo(..),
-    Tag(..),
-    ArtistStatistics(..),
-    Torrent (..),
-    TorrentID(..),
-    TorrentGroup(..),
-    TorrentGroupID(..),
-    Index(..),
-    GazelleT(..),
-    GazelleF(..),
-    GazelleError(..),
-    GazelleOptions(..),
-    GazelleState(..),
-    runRoute,
-    receiveRoute,
-    failWith,
-) where
+module Network.Gazelle.Types where
 
 import Network.Gazelle.Types.Artist
 import Network.Gazelle.Types.Error

@@ -21,17 +21,20 @@ library
     Network.Gazelle.Actions
     Network.Gazelle.Actions.Artist
     Network.Gazelle.Actions.Index
+    Network.Gazelle.Actions.Search
     Network.Gazelle.Actions.Torrent
     Network.Gazelle.Login
     Network.Gazelle.Routes
     Network.Gazelle.Routes.Artist
     Network.Gazelle.Routes.Index
+    Network.Gazelle.Routes.Search
     Network.Gazelle.Routes.Torrent
     Network.Gazelle.Types
     Network.Gazelle.Types.Artist
     Network.Gazelle.Types.Error
     Network.Gazelle.Types.Gazelle
     Network.Gazelle.Types.Index
+    Network.Gazelle.Types.Search
     Network.Gazelle.Types.Torrent
   -- other-modules:
   -- other-extensions:
