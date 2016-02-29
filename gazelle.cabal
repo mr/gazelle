@@ -33,6 +33,7 @@ library
     Network.Gazelle.Types.Artist
     Network.Gazelle.Types.Error
     Network.Gazelle.Types.Gazelle
+    Network.Gazelle.Types.Id
     Network.Gazelle.Types.Index
     Network.Gazelle.Types.Search
     Network.Gazelle.Types.Torrent

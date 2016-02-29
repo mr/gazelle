@@ -5,11 +5,13 @@ module Network.Gazelle.Types.Search (
     TorrentResult(..)
 ) where
 
+import Network.Gazelle.Types.Gazelle
+import Network.Gazelle.Types.Id
+
 import Data.Aeson
 import Data.Text (Text)
 
 import Network.API.Builder
-import Network.Gazelle.Types.Gazelle
 
 data Page = Page {
     pCurrentPage :: Integer,
@@ -27,7 +29,7 @@ instance Receivable Page where
     receive = useResponseFromJSON
 
 data SearchResult = SearchResult {
-    srGroupId :: Integer,
+    srGroupId :: TorrentGroupID,
     srGroupName :: Text,
     srArtist :: Text,
     srTags :: [Text],
@@ -59,7 +61,7 @@ instance FromJSON SearchResult where
         o .: "totalLeechers"
 
 data TRArtist = TRArtist {
-    traId :: Integer,
+    traId :: ArtistID,
     traName :: Text,
     traAliasId :: Integer
 } deriving Show
@@ -71,7 +73,7 @@ instance FromJSON TRArtist where
         o .: "aliasId"
 
 data TorrentResult = TorrentResult {
-    trId :: Integer,
+    trId :: TorrentID,
     trEditionId :: Integer,
     trArtists :: [TRArtist],
     trRemastered :: Bool,

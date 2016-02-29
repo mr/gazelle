@@ -2,14 +2,13 @@ module Network.Gazelle.Types.Torrent (
     Entry(..),
     MusicInfo(..),
     Torrent(..),
-    TorrentID(..),
     TorrentGroup(..),
-    TorrentGroupID(..),
     TorrentAndGroup(..),
     TorrentGroupAndChildren(..)
 ) where
 
 import Network.Gazelle.Types.Gazelle
+import Network.Gazelle.Types.Id
 
 import Data.Aeson
 import Data.Maybe
@@ -17,13 +16,6 @@ import Data.Text (Text)
 import Data.Scientific
 
 import Network.API.Builder
-
-newtype TorrentID = TorrentID Integer
-    deriving Show
-
-instance FromJSON TorrentID where
-    parseJSON = withScientific "TorrentID" $
-        return . TorrentID . round . toRealFloat
 
 data Torrent = Torrent {
     tId :: TorrentID,
@@ -82,13 +74,6 @@ instance FromJSON Torrent where
 instance Receivable Torrent where
     receive = useResponseFromJSON
 
-newtype TorrentGroupID = TorrentGroupID Integer
-    deriving Show
-
-instance FromJSON TorrentGroupID where
-    parseJSON = withScientific "TorrentGroupID" $
-        return . TorrentGroupID . round . toRealFloat
-
 data MusicInfo = MusicInfo {
     miComposers :: [Entry],
     miDj :: [Entry],
@@ -110,7 +95,7 @@ instance FromJSON MusicInfo where
         o .: "producer"
 
 data Entry = Entry {
-    eId :: Integer,
+    eId :: ArtistID,
     eName :: Text
 } deriving Show
 

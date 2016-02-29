@@ -1,25 +1,18 @@
 module Network.Gazelle.Types.Artist (
     Artist(..),
-    ArtistID(..),
-    Tag(..),
-    ArtistStatistics(..)
+    ArtistEntry(..),
+    ArtistStatistics(..),
+    Tag(..)
 ) where
 
 import Network.Gazelle.Types.Gazelle
-
-import Network.API.Builder
+import Network.Gazelle.Types.Id
 
 import Data.Aeson
 import Data.Scientific
-
 import Data.Text (Text)
 
-newtype ArtistID = ArtistID Integer
-    deriving Show
-
-instance FromJSON ArtistID where
-    parseJSON = withScientific "ArtistID" $
-        return . ArtistID . round . toRealFloat
+import Network.API.Builder
 
 data Tag = Tag {
     tagName :: Text,
@@ -46,13 +39,6 @@ instance FromJSON ArtistStatistics where
         o .: "numSeeders" <*>
         o .: "numLeechers" <*>
         o .: "numSnatches"
-
-newtype SimilarId = SimilarId Integer
-    deriving Show
-
-instance FromJSON SimilarId where
-    parseJSON = withScientific "SimilarId" $
-        return . SimilarId . round . toRealFloat
 
 data ArtistEntry = ArtistEntry {
     aeId :: Integer,
