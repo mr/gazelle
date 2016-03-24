@@ -7,7 +7,7 @@ username = "username"
 password = "password"
 
 main = do
-    res <- runGazelle username password $
+    res <- runGazelle username password $ \cj ->
         defaultSearch "Death Grips" >>= liftIO . print
     case res of
         Left e -> print e

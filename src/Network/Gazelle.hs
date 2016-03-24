@@ -18,7 +18,8 @@ module Network.Gazelle (
     getTorrentGroup,
     getTorrentGroupAndChildren,
     getIndex,
-    defaultSearch
+    defaultSearch,
+    sessionCJ
 ) where
 
 import Network.Gazelle.Actions
@@ -37,19 +38,20 @@ import Network.HTTP.Client.Internal (expose, cookie_name, CookieJar(..))
 import Network.HTTP.Client hiding (Response)
 import Network.HTTP.Client.TLS
 
-runGazelle :: MonadIO m => Text -> Text -> GazelleT m a -> m (Either (APIError GazelleError) a)
+runGazelle :: MonadIO m => Text -> Text -> (CookieJar -> GazelleT m a) -> m (Either (APIError GazelleError) a)
 runGazelle user pass = runGazelleWith (GazelleOptions user pass whatCD whatCDLogin tlsManagerSettings)
 
-runGazelleWith :: MonadIO m => GazelleOptions -> GazelleT m a -> m (Either (APIError GazelleError) a)
+runGazelleWith :: MonadIO m => GazelleOptions -> (CookieJar -> GazelleT m a) -> m (Either (APIError GazelleError) a)
 runGazelleWith (GazelleOptions user pass b lb ms) gazelle = do
     manager <- liftIO $ newManager ms
     allLoginCreds <- fmap (fmap Just) $ interpretIO (GazelleState manager Nothing lb) $ login user pass
     let loginCreds = fmap sessionCJ <$> allLoginCreds
     case loginCreds of
         Left err -> return $ Left err
-        Right cookieJar -> let bb = b { _customizeRequest = \req -> req { cookieJar = cookieJar } } in
-            interpretIO (GazelleState manager cookieJar bb) gazelle
-    
+        Right Nothing -> return $ Left $ APIError $ GenericGazelleError
+        Right jCookieJar@(Just cookieJar) ->
+            let bb = b { _customizeRequest = \req -> req { cookieJar = jCookieJar } }
+            in interpretIO (GazelleState manager jCookieJar bb) $ gazelle cookieJar
 
 interpretIO :: MonadIO m => GazelleState -> GazelleT m a -> m (Either (APIError GazelleError) a)
 interpretIO gstate (GazelleT g) = runFreeT g >>= \case
