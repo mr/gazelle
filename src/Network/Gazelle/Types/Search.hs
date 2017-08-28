@@ -5,13 +5,10 @@ module Network.Gazelle.Types.Search (
     TorrentResult(..)
 ) where
 
-import Network.Gazelle.Types.Gazelle
 import Network.Gazelle.Types.Id
 
 import Data.Aeson
 import Data.Text (Text)
-
-import Network.API.Builder
 
 data Page = Page {
     pCurrentPage :: Integer,
@@ -24,9 +21,6 @@ instance FromJSON Page where
         o .: "currentPage" <*>
         o .: "pages" <*>
         o .: "results"
-
-instance Receivable Page where
-    receive = useResponseFromJSON
 
 data SearchResult = SearchResult {
     srGroupId :: TorrentGroupID,

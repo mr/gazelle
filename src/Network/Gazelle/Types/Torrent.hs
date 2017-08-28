@@ -7,15 +7,12 @@ module Network.Gazelle.Types.Torrent (
     TorrentGroupAndChildren(..)
 ) where
 
-import Network.Gazelle.Types.Gazelle
 import Network.Gazelle.Types.Id
 
 import Data.Aeson
 import Data.Maybe
 import Data.Text (Text)
 import Data.Scientific
-
-import Network.API.Builder
 
 data Torrent = Torrent {
     tId :: TorrentID,
@@ -70,9 +67,6 @@ instance FromJSON Torrent where
         o .: "fileList" <*>
         o .: "filePath" <*>
         o .: "userId"
-
-instance Receivable Torrent where
-    receive = useResponseFromJSON
 
 data MusicInfo = MusicInfo {
     miComposers :: [Entry],
@@ -132,9 +126,6 @@ instance FromJSON TorrentGroup where
         o .: "vanityHouse" <*>
         o .: "musicInfo"
 
-instance Receivable TorrentGroup where
-    receive = useResponseFromJSON
-
 data TorrentAndGroup = TorrentAndGroup {
     tagGroup :: TorrentGroup,
     tagTorrent :: Torrent
@@ -145,9 +136,6 @@ instance FromJSON TorrentAndGroup where
         o .: "group" <*>
         o .: "torrent"
 
-instance Receivable TorrentAndGroup where
-    receive = useResponseFromJSON
-
 data TorrentGroupAndChildren = TorrentGroupAndChildren {
     tgcGroup :: TorrentGroup,
     tgcChildren :: [Torrent]
@@ -157,6 +145,3 @@ instance FromJSON TorrentGroupAndChildren where
     parseJSON = withObject "TorrentGroupAndChildren" $ \o -> TorrentGroupAndChildren <$>
         o .: "group" <*>
         o .: "torrents"
-
-instance Receivable TorrentGroupAndChildren where
-    receive = useResponseFromJSON

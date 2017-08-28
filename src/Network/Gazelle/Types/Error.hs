@@ -4,15 +4,10 @@ module Network.Gazelle.Types.Error (
 
 import Data.Aeson
 
-import Network.API.Builder
-
 import Data.Text (Text)
 
 data GazelleError = GenericGazelleError
     deriving Show
-
-instance ErrorReceivable GazelleError where
-    receiveError = useErrorFromJSON
 
 instance FromJSON GazelleError where
     parseJSON = withObject "GazelleError" $ \o -> do

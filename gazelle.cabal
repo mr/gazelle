@@ -18,21 +18,9 @@ cabal-version:       >=1.10
 library
   exposed-modules:
     Network.Gazelle
-    Network.Gazelle.Actions
-    Network.Gazelle.Actions.Artist
-    Network.Gazelle.Actions.Index
-    Network.Gazelle.Actions.Search
-    Network.Gazelle.Actions.Torrent
-    Network.Gazelle.Login
-    Network.Gazelle.Routes
-    Network.Gazelle.Routes.Artist
-    Network.Gazelle.Routes.Index
-    Network.Gazelle.Routes.Search
-    Network.Gazelle.Routes.Torrent
     Network.Gazelle.Types
     Network.Gazelle.Types.Artist
     Network.Gazelle.Types.Error
-    Network.Gazelle.Types.Gazelle
     Network.Gazelle.Types.Id
     Network.Gazelle.Types.Index
     Network.Gazelle.Types.Search
@@ -40,29 +28,20 @@ library
   -- other-modules:
   -- other-extensions:
   build-depends:        base >=4.8 && <4.10,
-                        api-builder,
                         aeson,
                         text,
                         http-types,
                         http-conduit,
                         http-client,
-                        mtl,
-                        free,
-                        transformers,
                         http-client-tls,
                         bytestring,
                         scientific
   hs-source-dirs:      src
   default-language:    Haskell2010
-  default-extensions:  OverloadedStrings,
-                       GADTs,
-                       GeneralizedNewtypeDeriving,
-                       LambdaCase,
-                       DeriveDataTypeable,
-                       DeriveGeneric
+  default-extensions:  OverloadedStrings
 
 executable gazelleTest
     main-is: Main.hs
     default-language: Haskell2010
-    build-depends: base >=4.8 && <4.9, gazelle, transformers, bytestring, http-client, http-client-tls, text
+    build-depends: base >=4.8 && <4.10, gazelle, transformers, bytestring, http-client, http-client-tls, text
     default-extensions: OverloadedStrings

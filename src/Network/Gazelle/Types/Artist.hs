@@ -5,14 +5,11 @@ module Network.Gazelle.Types.Artist (
     Tag(..)
 ) where
 
-import Network.Gazelle.Types.Gazelle
 import Network.Gazelle.Types.Id
 
 import Data.Aeson
 import Data.Scientific
 import Data.Text (Text)
-
-import Network.API.Builder
 
 data Tag = Tag {
     tagName :: Text,
@@ -79,6 +76,3 @@ instance FromJSON Artist where
         o .: "tags" <*>
         o .: "similarArtists" <*>
         o .: "statistics"
-
-instance Receivable Artist where
-    receive = useResponseFromJSON
