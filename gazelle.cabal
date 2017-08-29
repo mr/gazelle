@@ -64,5 +64,5 @@ library
 executable gazelleTest
     main-is: Main.hs
     default-language: Haskell2010
-    build-depends: base >=4.8 && <4.9, gazelle, transformers, bytestring, http-client, http-client-tls, text
+    build-depends: base >=4.8 && <4.10, gazelle, transformers, bytestring, http-client, http-client-tls, text
     default-extensions: OverloadedStrings

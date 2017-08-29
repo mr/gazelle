@@ -71,10 +71,10 @@ handleReceive r s = do
     return res
 
 whatCD :: Builder
-whatCD = basicBuilder "WhatCD API" "http://what.cd/ajax.php"
+whatCD = basicBuilder "Redacted API" "https://redacted.ch/ajax.php"
 
 sessionCJ :: CookieJar -> CookieJar
 sessionCJ = CJ . filter ((== "session") . cookie_name) . expose
 
 whatCDLogin :: Builder
-whatCDLogin = basicBuilder "WhatCD API Login" "http://what.cd/login.php"
+whatCDLogin = basicBuilder "Redacted API Login" "https://redacted.ch/login.php"
