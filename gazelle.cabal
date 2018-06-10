@@ -39,7 +39,7 @@ library
     Network.Gazelle.Types.Torrent
   -- other-modules:
   -- other-extensions:
-  build-depends:        base >=4.8 && <4.10,
+  build-depends:        base >=4.8 && <5.0,
                         api-builder,
                         aeson,
                         text,
@@ -64,5 +64,5 @@ library
 executable gazelleTest
     main-is: Main.hs
     default-language: Haskell2010
-    build-depends: base >=4.8 && <4.10, gazelle, transformers, bytestring, http-client, http-client-tls, text
+    build-depends: base >=4.8 && <5.0, gazelle, transformers, bytestring, http-client, http-client-tls, text
     default-extensions: OverloadedStrings

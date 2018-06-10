@@ -1,16 +1,15 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: lts-9.2
+resolver: lts-11.13
 
 # Local packages, usually specified by relative directory name
 packages:
 - '.'
-- '../api-builder'
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps: [
-  'api-builder-0.12.0.0'
+    'api-builder-0.15.0.0'
 ]
 
 # Override default flag values for local packages and extra-deps
